@@ -15,38 +15,38 @@
 </template>
 
 <script>
-  export default {
-    name: 'login',
-    data() {
-      return {
-        labelPosition: 'top',
-        formdata: {
-          username: '',
-          password: ''
-        }
+export default {
+  name: 'login',
+  data () {
+    return {
+      labelPosition: 'top',
+      formdata: {
+        username: '',
+        password: ''
       }
-    },
-    methods: {
-      async headlelogin() {
-        const res = await this.$http.post('login', this.formdata)
-        const {meta:{msg, status}, data} = res.data
-        console.log(data)
-        if (status === 200) {
-          this.$message({
-            message: msg,
-            type: 'success'
-          })
-          const token = localStorage.setItem('token', data.token)
-          this.$router.push({name: 'home'})
-        } else {
-          this.$message({
-            message: msg,
-            type: 'success'
-          })
-        }
+    }
+  },
+  methods: {
+    async headlelogin () {
+      const res = await this.$http.post('login', this.formdata)
+      const {meta: {msg, status}, data} = res.data
+      console.log(data)
+      if (status === 200) {
+        this.$message({
+          message: msg,
+          type: 'success'
+        })
+        const token = localStorage.setItem('token', data.token)
+        this.$router.push({name: 'home'})
+      } else {
+        this.$message({
+          message: msg,
+          type: 'success'
+        })
       }
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
