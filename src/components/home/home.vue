@@ -86,25 +86,25 @@
 </template>
 
 <script>
-  export default {
-    name: 'home',
-    beforeCreate() {
-      const token = localStorage.getItem('token')
-      if (!token) {
-        this.$router.push({name: 'login'})
-      }
-    },
-    methods: {
-      handleLoginOut() {
-        this.$message({
-          message: '退出成功',
-          type: 'warning'
-        })
-        localStorage.clear()
-        this.$router.push({name: 'login'})
-      }
+export default {
+  name: 'home',
+  beforeCreate () {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      this.$router.push({name: 'login'})
+    }
+  },
+  methods: {
+    handleLoginOut () {
+      this.$message({
+        message: '退出成功',
+        type: 'warning'
+      })
+      localStorage.clear()
+      this.$router.push({name: 'login'})
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
