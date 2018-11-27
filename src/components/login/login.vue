@@ -8,7 +8,7 @@
       <el-form-item label="密码">
         <el-input v-model="formdata.password"></el-input>
       </el-form-item>
-      <el-button class="button" @click.prevent="headlelogin()" type="primary">登录</el-button>
+      <el-button class="button" @click.prevent="handleLogin()" type="primary">登录</el-button>
     </el-form>
   </div>
 
@@ -27,16 +27,16 @@ export default {
     }
   },
   methods: {
-    async headlelogin () {
+    async handleLogin () {
       const res = await this.$http.post('login', this.formdata)
       const {meta: {msg, status}, data} = res.data
-      console.log(data)
+      // console.log(data)
       if (status === 200) {
         this.$message({
           message: msg,
           type: 'success'
         })
-        const token = localStorage.setItem('token', data.token)
+        localStorage.setItem('token', data.token)
         this.$router.push({name: 'home'})
       } else {
         this.$message({

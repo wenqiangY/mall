@@ -1,20 +1,25 @@
 <template>
-  <el-container class="container">
+  <el-container class="home-container">
     <el-header class="header">
-      <h2>电商后台管理系统</h2>
+      <el-row>
+        <!--<el-col :span="4"><div></div></el-col>-->
+        <el-col :span="23"><h2>电商后台管理系统</h2></el-col>
+        <el-col :span="1"><a @click.prevent="handleLoginOut()" href="#">退出</a></el-col>
+      </el-row>
     </el-header>
     <el-container>
       <el-aside class="aside" width="200px">
         <el-menu
           default-active="2"
           class="el-menu-vertical-demo"
-          :unique-opened="true">
+          :unique-opened="true"
+          :router="true">
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>用户管理</span>
             </template>
-            <el-menu-item index="1-4-1">
+            <el-menu-item index="/users">
               <i class="el-icon-menu"></i>
               用户列表
             </el-menu-item>
@@ -71,39 +76,62 @@
               数据报表
             </el-menu-item>
           </el-submenu>
-
         </el-menu>
       </el-aside>
-      <el-main class="main">Main</el-main>
+      <el-main class="main">
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
-export default {
-  name: 'home'
-}
+  export default {
+    name: 'home',
+    beforeCreate() {
+      const token = localStorage.getItem('token')
+      if (!token) {
+        this.$router.push({name: 'login'})
+      }
+    },
+    methods: {
+      handleLoginOut() {
+        this.$message({
+          message: '退出成功',
+          type: 'warning'
+        })
+        localStorage.clear()
+        this.$router.push({name: 'login'})
+      }
+    }
+  }
 </script>
 
 <style lang="scss" scoped>
-  .container {
+  .home-container {
     height: 100%;
 
     .header {
       background: #b3c0d1;
+      width: 100%;
+
+      div {
+      }
 
       h2 {
-        width: 800px;
-        height: 100%;
-        line-height: 50px;
+        line-height: 20px;
         text-align: center;
-        margin: 0 auto;
+        padding-bottom: 10px;
         color: #fff;
+      }
+
+      a {
+        line-height: 60px;
       }
     }
 
     .aside {
-      background: #d3dce6;
+      background: #fff;
     }
 
     .main {

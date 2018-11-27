@@ -7,7 +7,7 @@ import App from './App'
 import router from './router'
 import MyHttpServer from '@/plugins/http'
 
-import '@/assets/css/index.css'
+import '@/assets/css/index.scss'
 
 Vue.use(ElementUI)
 Vue.use(MyHttpServer)
