@@ -7,6 +7,7 @@ import App from '@/App'
 import router from '@/router'
 import MyHttpServer from '@/plugins/http'
 import moment from 'moment'
+import MyBrand from './components/cuscom/myBrand'
 
 import '@/assets/css/index.scss'
 
@@ -17,6 +18,8 @@ Vue.config.productionTip = false
 Vue.filter('timeDate', (value) => {
   return moment(value).format('YYYY-MM-DD')
 })
+
+Vue.component(MyBrand.name, MyBrand)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
